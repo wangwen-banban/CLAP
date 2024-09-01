@@ -86,6 +86,7 @@ def create_model(
     fusion_type: str = 'None'
     # pretrained_image: bool = False,
 ):
+    # "/"被"-"替换
     amodel_name = amodel_name.replace(
         "/", "-"
     )  # for callers using old naming with / in ViT names
@@ -94,7 +95,7 @@ def create_model(
     if pretrained == "openai":
         if amodel_name in _MODEL_CONFIGS:
             logging.info(f"Loading {amodel_name} model config.")
-            model_cfg = deepcopy(_MODEL_CONFIGS[amodel_name])
+            model_cfg = deepcopy(_MODEL_CONFIGS[amodel_name]) # deepcopy是深拷贝，不会影响原始数据
         else:
             logging.error(
                 f"Model config for {amodel_name} not found; available models {list_models()}."

@@ -17,7 +17,7 @@ import wget
 from clap_module.factory import load_state_dict
 
 
-class CLAP_Module(torch.nn.Module):
+class CLAP_Module(torch.nn.Module): # fusion是指的是否采用多维度的处理不同长度的audio input
     def __init__(self, enable_fusion=False, device=None, amodel= 'HTSAT-tiny', tmodel='roberta') -> None:
         """Initialize CLAP Model
 

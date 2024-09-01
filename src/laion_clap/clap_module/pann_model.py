@@ -525,7 +525,7 @@ class Cnn10(nn.Module):
 
 def create_pann_model(audio_cfg, enable_fusion=False, fusion_type='None'):
     try:
-        ModelProto = eval(audio_cfg.model_name)
+        ModelProto = eval(audio_cfg.model_name) # 将字符串进行python解析，例如当输入为'Cnn14'时，返回Cnn14类
         model = ModelProto(
             sample_rate = audio_cfg.sample_rate,
             window_size = audio_cfg.window_size,

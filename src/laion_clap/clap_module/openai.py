@@ -56,7 +56,7 @@ def load_openai_model(
 
     try:
         # loading JIT archive
-        model = torch.jit.load(model_path, map_location=device if jit else "cpu").eval()
+        model = torch.jit.load(model_path, map_location=device if jit else "cpu").eval() # 使用Just-In-Time编译，提高性能，摆脱Python解释器
         state_dict = None
     except RuntimeError:
         # loading saved state dict
@@ -72,7 +72,7 @@ def load_openai_model(
             sd = {k[7:]: v for k, v in state_dict["state_dict"].items()}
             model = build_model_from_openai_state_dict(sd, model_cfg, enable_fusion, fusion_type).to(device)
 
-        if str(device) == "cpu":
+        if str(device) == "cpu": # cpu上float32的计算速度更快
             model.float()
         return model
 
